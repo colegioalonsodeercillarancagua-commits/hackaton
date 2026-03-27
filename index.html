@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackatón de Estudio | Resolución</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+<nav class="navbar">
+    <div class="logo">Hackatón<span>.dev</span></div>
+    <ul class="nav-links">
+        <li><a href="#etapa1">Etapa I</a></li>
+        <li><a href="#etapa2">Etapa II</a></li>
+        <li><a href="#etapa3">Etapa III</a></li>
+        <li><a href="#etapa4">Etapa IV</a></li>
+        <li><a href="#etapa5">Etapa V</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+    </ul>
+    <button id="theme-toggle" class="btn-neon">Modo Claro</button>
+</nav>
+
+<header class="hero">
+    <h1 class="neon-text">Resolución Hackatón</h1>
+    <p>Camino a la Certificación Full Stack Python</p>
+</header>
+
+<main class="container">
+
+    <section id="etapa1" class="card">
+        <h2 class="neon-title">Etapa I: Funciones y Módulos</h2>
+        <div class="content">
+            <p><strong>El misterio de los asteriscos:</strong> <code>*args</code> genera una tupla para argumentos posicionales, mientras que <code>**kwargs</code> construye un diccionario para argumentos de clave-valor.</p>
+            <p><strong>Importaciones:</strong> Usar <code>import modulo</code> previene colisiones de nombres, y <code>from modulo import funcion as f</code> crea alias rápidos.</p>
+            <h3 class="sub-neon">Estrategia de Importación</h3>
+            <div class="table-container">
+                <table class="neon-table">
+                    <thead>
+                    <tr>
+                        <th>Sintaxis</th>
+                        <th>Escenario Real</th>
+                        <th>Ventaja Anti-Colisión</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>import modulo</code></td>
+                        <td>Recomendado por defecto.</td>
+                        <td>Usa <code>modulo.funcion()</code>; Python sabe exactamente de dónde viene.</td>
+                    </tr>
+                    <tr>
+                        <td><code>from modulo import f</code></td>
+                        <td>Pocas funciones específicas.</td>
+                        <td>Llamada directa, pero riesgo si tienes funciones con nombre igual.</td>
+                    </tr>
+                    <tr>
+                        <td><code>from modulo import f as alias</code></td>
+                        <td>Nombre largo o ya existente.</td>
+                        <td>El apodo único elimina cualquier conflicto de nombre original.</td>
+                    </tr>
+                    <tr>
+                        <td><code>import modulo as alias</code></td>
+                        <td>Análisis de datos (ej. <code>import pandas as pd</code>).</td>
+                        <td>Conciso pero mantiene claridad con la notación de punto.</td>
+                    </tr>
+                    <tr>
+                        <td><code>from modulo import *</code></td>
+                        <td>No recomendado profesionalmente.</td>
+                        <td><strong>Peligro:</strong> Puede sobrescribir funciones locales sin aviso.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-neon">Implementación Técnica</h3>
+            <div class="code-block">
+            <pre>
+<span class="code-keyword">def</span> <span class="code-func">crear_perfil_usuario</span>(nombre, apellido, **kwargs):
+    <span class="code-comment"># El diccionario kwargs captura datos adicionales ilimitados</span>
+    perfil = {<span class="code-str">'nombre'</span>: nombre, <span class="code-str">'apellido'</span>: apellido}
+    perfil.update(kwargs)
+    <span class="code-keyword">return</span> perfil
+
+<span class="code-comment"># Suposición de uso:</span>
+<span class="code-keyword">from</span> perfiles_app <span class="code-keyword">import</span> crear_perfil_usuario <span class="code-keyword">as</span> nuevo_perfil
+            </pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="etapa2" class="card">
+        <h2 class="neon-title">Etapa II: Safari de Objetos (POO)</h2>
+        <div class="content">
+
+            <div class="qa-container">
+                <div class="qa-item">
+                    <p class="qa-question">1. ¿Qué función cumple <code>__init__</code> al "nacer" un objeto y por qué <code>self</code> va primero?</p>
+                    <p class="qa-answer">El método <code>__init__</code> inicializa los atributos. Mientras <code>__new__</code> crea el objeto vacío, <code>__init__</code> le asigna valores. Se usa <code>self</code> porque hace referencia al objeto específico creado, permitiendo que los valores se asignen a esa instancia y no a la clase en general.</p>
+                </div>
+
+                <div class="qa-item">
+                    <p class="qa-question">2. ¿Qué hace la línea "mágica" <code>super().__init__()</code>?</p>
+                    <p class="qa-answer">Extiende las funcionalidades de la clase padre a la clase hija. Si se omite, el programa falla porque las propiedades del padre no existirían en la instancia del hijo, dejando al objeto "incompleto" respecto a su herencia.</p>
+                </div>
+
+                <div class="qa-item">
+                    <p class="qa-question">3. ¿Cuándo elegir Composición sobre Herencia? (Caso Universidad)</p>
+                    <p class="qa-answer">Se elige cuando la herencia genera conflictos de roles. <strong>Ejemplo:</strong> En una universidad, si un Profesor también estudia, la herencia de Persona en ambos entra en conflicto. Es mejor que la Persona esté <strong>compuesta</strong> por roles; así, una persona puede tener el rol de alumno y profesor simultáneamente sin problemas estructurales.</p>
+                </div>
+            </div>
+
+            <h3 class="sub-neon">Arquitectura de Clases: Sistema de Usuarios</h3>
+
+            <div class="architecture-grid">
+                <div class="class-box parent">
+                    <h4>Clase Padre: Usuario</h4>
+                    <ul>
+                        <li><strong>Atributos:</strong> nombre, correo</li>
+                        <li><strong>Función:</strong> Comportamiento general y datos básicos.</li>
+                    </ul>
+                </div>
+
+                <div class="class-box child">
+                    <h4>Hija: Administrador (Herencia)</h4>
+                    <p><small>Relación: <code>super().__init__()</code></small></p>
+                    <ul>
+                        <li>Hereda de Usuario.</li>
+                        <li><strong>Composición:</strong> <code>self.privilegios = Privilegios()</code></li>
+                    </ul>
+                </div>
+
+                <div class="class-box component">
+                    <h4>Independiente: Privilegios</h4>
+                    <ul>
+                        <li><strong>Atributos:</strong> Lista ["borrar_usuarios", "editar_cursos"]</li>
+                        <li><strong>Método:</strong> <code>show_privileges()</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-block" style="margin-top: 1.5rem;">
+                    <pre>
+            <span class="code-comment"># Ejemplo de Composición en el Administrador</span>
+            <span class="code-keyword">class</span> <span class="code-func">Administrador</span>(Usuario):
+            <span class="code-keyword">def</span> <span class="code-func">__init__</span>(self, nombre, correo):
+            <span class="code-keyword">super</span>().__init__(nombre, correo)
+            <span class="code-comment"># El admin "tiene un" objeto Privilegios</span>
+        self.privilegios = Privilegios()
+            </pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="etapa3" class="card alert-border">
+        <h2 class="neon-title title-warning">Etapa III: Simulacro de Desastre</h2>
+        <div class="content">
+
+            <div class="qa-container">
+                <div class="qa-item warning-item">
+                    <p class="qa-question">1. ¿Qué ventaja crítica ofrece <code>with open()</code> sobre el cierre manual?</p>
+                    <p class="qa-answer">La declaración <code>with</code> garantiza que el archivo se cierre automáticamente en cuanto termina el bloque de código, incluso si ocurre un error inesperado. El cierre manual con <code>.close()</code> es arriesgado, ya que un olvido o un fallo previo en el script dejaría el archivo abierto, consumiendo memoria o corrompiendo datos.</p>
+                </div>
+
+                <div class="qa-item warning-item">
+                    <p class="qa-question">2. ¿Por qué no poner todo el código dentro de un <code>try</code>?</p>
+                    <p class="qa-answer">Es una mala práctica porque dificulta identificar qué línea específica causó el error. El bloque <code>try</code> debe contener <strong>únicamente</strong> la operación con potencial de fallo. En el bloque <code>else</code>, se deben alojar las instrucciones que dependen del éxito del <code>try</code>, manteniendo la lógica separada y limpia.</p>
+                </div>
+
+                <div class="qa-item warning-item">
+                    <p class="qa-question">3. ¿Por qué preferir <code>json.dump/load</code> sobre texto plano?</p>
+                    <p class="qa-answer">El módulo JSON permite guardar estructuras complejas (listas, diccionarios) de forma nativa. A diferencia del texto plano (<code>.write</code>), que guarda todo como simples letras, JSON es un formato ligero, estructurado y portátil que permite que los datos sean leídos por casi cualquier lenguaje de programación sin perder su forma original.</p>
+                </div>
+            </div>
+
+            <h3 class="sub-neon warning-text">Protocolo de Recuperación de Datos</h3>
+            <div class="code-block warning-block">
+            <pre>
+<span class="code-keyword">import</span> json
+
+archivo_nombre = <span class="code-str">"configuracion_usuarios.json"</span>
+
+<span class="code-keyword">try</span>:
+    <span class="code-comment"># Solo la operación crítica va dentro del try</span>
+    <span class="code-keyword">with</span> <span class="code-func">open</span>(archivo_nombre, <span class="code-str">"r"</span>) <span class="code-keyword">as</span> archivo:
+        configuracion = json.load(archivo)
+<span class="code-keyword">except</span> <span class="code-func">FileNotFoundError</span>:
+    <span class="code-comment"># Manejo de fallo silencioso o por defecto</span>
+    configuracion = {<span class="code-str">"tema"</span>: <span class="code-str">"claro"</span>, <span class="code-str">"notificaciones"</span>: <span class="code-keyword">True</span>}
+    <span class="code-keyword">pass</span>
+<span class="code-keyword">else</span>:
+    <span class="code-func">print</span>(<span class="code-str">"✅ Configuración cargada con éxito."</span>)
+            </pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="etapa4" class="card engine-border">
+        <h2 class="neon-title title-engine">Etapa IV: Radiografía del Framework</h2>
+        <div class="content">
+
+            <div class="logic-grid">
+                <div class="logic-box">
+                    <h3 class="sub-neon">El Proyecto (Estructura Global)</h3>
+                    <p class="qa-answer">Es el contenedor principal. Organizativamente es el conjunto de configuraciones y aplicaciones. Técnicamente controla la interacción con el sistema y la base de datos global.</p>
+                </div>
+                <div class="logic-box">
+                    <h3 class="sub-neon">La Aplicación (Módulo Específico)</h3>
+                    <p class="qa-answer">Es una pieza modular creada para una tarea única. Define su propia estructura de datos y la lógica de sus páginas específicas, permitiendo que sea reutilizable.</p>
+                </div>
+            </div>
+
+            <div class="qa-container" style="margin-top: 2rem;">
+                <div class="qa-item engine-item">
+                    <p class="qa-question">2. ¿Cómo traducimos Clases de Python a Tablas de SQLite?</p>
+                    <p class="qa-answer">SQLite no entiende objetos, por lo que usamos el sistema de migraciones. Los comandos secuenciales son:</p>
+                    <div class="terminal-mini">
+                        <code>python manage.py makemigrations [app]</code><br>
+                        <code>python manage.py migrate</code>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="sub-neon text-center">Flujo de Petición: El Ciclo Django</h3>
+
+            <div class="workflow-container">
+                <div class="workflow-step">
+                    <div class="icon">🚦</div>
+                    <h4>El Semáforo</h4>
+                    <p><code>urls.py</code>: Valida la ruta y redirige la petición.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="icon">💁‍♂️</div>
+                    <h4>El Recepcionista</h4>
+                    <p><code>views.py</code>: Procesa la lógica y solicita datos.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="icon">🎨</div>
+                    <h4>El Pintor</h4>
+                    <p><code>Templates</code>: Renderiza el HTML final para el usuario.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="etapa5" class="card architect-border">
+        <h2 class="neon-title title-architect">Etapa V: El Arquitecto Web</h2>
+        <div class="content">
+
+            <div class="essay-container">
+                <h3 class="sub-neon">Mini-Ensayo: La POO como Cimiento de Django</h3>
+
+                <p class="essay-text">
+                    Entender la <strong>Programación Orientada a Objetos (POO)</strong> no es solo un capricho técnico, sino la columna vertebral absoluta para construir arquitecturas web con Django. El framework funciona bajo un paradigma donde la base de datos no se manipula con código SQL en bruto, sino a través de un potente <strong>ORM (Object-Relational Mapping)</strong>.
+                </p>
+
+                <div class="concept-callout">
+                    <p><strong>El Puente Lógico:</strong> Al crear un modelo en <code>models.py</code>, diseñamos una "Clase hija" que hereda de <code>models.Model</code>. Gracias a la POO, esta clase se transforma estructuralmente en una tabla entera, y sus atributos en las columnas de la base de datos.</p>
+                </div>
+
+
+
+                <p class="essay-text">
+                    Sin el dominio de las <strong>Clases, la Herencia y la Instanciación</strong> (Etapa 2), sería imposible comprender cómo Django interconecta la información, como el uso de <code>ForeignKey</code> para relacionar una Entrada con un Tema. Entender el "por qué" detrás del molde nos da el poder para modelar sistemas complejos escribiendo código Python puro, ordenado y escalable.
+                </p>
+            </div>
+
+            <div class="summary-box">
+                <h4>Conceptos Clave de Integración:</h4>
+                <ul class="neon-list">
+                    <li><strong>__str__():</strong> Define la identidad visual del objeto en el Panel de Administración.</li>
+                    <li><strong>{{ variable }}:</strong> El lenguaje de etiquetas para imprimir datos en el Frontend.</li>
+                    <li><strong>{% logic %}:</strong> Control de flujo (bucles y condiciones) dentro de HTML.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="card quiz-section">
+        <h2 class="neon-title text-center">Desafío Final</h2>
+        <p class="text-center">Demuestra tus conocimientos adquiridos.</p>
+
+        <form id="quiz-form">
+            <div class="question">
+                <label>1. ¿Qué estructura de datos genera **kwargs internamente en Python?</label>
+                <select id="q1" required>
+                    <option value="">Selecciona una opción...</option>
+                    <option value="lista">Una Lista</option>
+                    <option value="tupla">Una Tupla</option>
+                    <option value="diccionario">Un Diccionario</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>2. En Django, ¿qué archivo actúa como el "Semáforo" de las peticiones web?</label>
+                <select id="q2" required>
+                    <option value="">Selecciona una opción...</option>
+                    <option value="views">views.py</option>
+                    <option value="urls">urls.py</option>
+                    <option value="models">models.py</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>3. ¿Qué herramienta de Django traduce Clases de Python a tablas de Base de Datos?</label>
+                <select id="q3" required>
+                    <option value="">Selecciona una opción...</option>
+                    <option value="sql">Consultas SQL manuales</option>
+                    <option value="orm">El ORM (Mapeador Objeto-Relacional)</option>
+                    <option value="html">El motor de plantillas HTML</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-neon submit-btn">Validar Respuestas</button>
+            <div id="quiz-result" class="result-message"></div>
+        </form>
+    </section>
+
+</main>
+
+<a href="#" id="scroll-top" class="floating-btn">↑</a>
+
+<script src="js/app.js"></script>
+</body>
+</html>
