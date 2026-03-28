@@ -647,3 +647,44 @@ pre {
         justify-content: center;
     }
 }
+/* Animación de parpadeo neón */
+@keyframes neon-pulse {
+    0%, 100% {
+        text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-magenta), 0 0 40px var(--neon-magenta);
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 15px #fff, 0 0 30px var(--neon-cyan), 0 0 60px var(--neon-cyan);
+        transform: scale(1.02);
+    }
+}
+
+.neon-text {
+    animation: neon-pulse 3s infinite ease-in-out;
+    display: inline-block; /* Necesario para que el transform funcione */
+}
+/* Estilo base para los iconos en la nav */
+.nav-links i {
+    margin-right: 6px;
+    color: var(--neon-cyan);
+    transition: 0.3s;
+}
+
+/* Resaltado para el botón de la Guía */
+.nav-guide {
+    color: var(--neon-magenta) !important;
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-guide i {
+    color: var(--neon-magenta) !important;
+}
+
+.nav-guide:hover {
+    background: rgba(255, 0, 255, 0.1);
+    box-shadow: 0 0 10px var(--neon-magenta);
+    text-shadow: 0 0 5px var(--neon-magenta);
+}

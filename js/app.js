@@ -50,10 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalPreguntas = 3;
 
         if (score === totalPreguntas) {
-            // Puntuación Perfecta: Efecto Cian Brillante
-            resultDiv.innerHTML = `¡Excelente! 🏆 ${score}/${totalPreguntas} <br> <span style="font-size: 0.8rem;">Tienes alma de Arquitecto Web. ¡Certificación asegurada!</span>`;
+            // 1. Lanzar Confeti Neón
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#0ff', '#f0f', '#fff'] // Colores cian, magenta y blanco
+            });
+
+            // 2. Mensaje de éxito
+            resultDiv.innerHTML = `¡Excelente! 🏆 ${score}/${totalPreguntas} <br> <span>¡Certificación asegurada!</span>`;
             resultDiv.style.color = 'var(--neon-cyan)';
-            resultDiv.style.textShadow = '0 0 15px var(--neon-cyan), 0 0 30px var(--neon-cyan)';
+            resultDiv.style.textShadow = '0 0 15px var(--neon-cyan)';
         }
         else if (score === 2) {
             // Casi perfecto: Efecto Oro/Amarillo (Etapa 3 vibes)
